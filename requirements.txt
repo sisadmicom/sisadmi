@@ -1,0 +1,20 @@
+# Django framework
+Django==5.0
+
+# API REST
+djangorestframework
+drf-spectacular
+
+# PostgreSQL driver
+psycopg2-binary
+
+# Manejo de variables de entorno
+django-environ
+
+# Filtrado avanzado en DRF
+django-filter
+
+# Servidor de producción
+gunicorn
+
+django-environ

@@ -1,0 +1,50 @@
+# =========================================
+#   GITIGNORE PARA PROYECTO DJANGO + DOCKER
+# =========================================
+
+# Archivos y carpetas de entorno virtual
+venv/
+.env
+*.env
+*.env.*
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Archivos de base de datos locales
+db.sqlite3
+
+# Archivos de logs y backups
+*.log
+*.bak
+*.swp
+*.seed
+*.pid
+
+# Configuración de IDEs
+.idea/
+.vscode/
+.DS_Store
+
+# Archivos estáticos generados por collectstatic
+staticfiles/
+media/
+
+# Archivos de Docker
+*.tar
+*.tar.gz
+*.zip
+*.gz
+
+# Archivos de compilación
+build/
+dist/
+*.egg-info/
+
+# Archivos locales temporales
+*.local
+*.secret
+*.tmp

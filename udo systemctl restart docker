@@ -1,0 +1,83 @@
+oct 05 18:20:30 sisadmi-Odoo systemd[1]: Starting docker.service - Docker Application Container Engine...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit docker.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit docker.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 190.[0m
+oct 05 18:20:36 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:20:36.778651057-05:00" level=info msg="Starting up"
+oct 05 18:20:36 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:20:36.804540419-05:00" level=info msg="OTEL tracing is not configured, using no-op tracer provider"
+oct 05 18:20:36 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:20:36.804843148-05:00" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+oct 05 18:20:44 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:20:44.943490932-05:00" level=info msg="[graphdriver] using prior storage driver: overlay2"
+oct 05 18:20:52 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:20:52.807492116-05:00" level=info msg="Loading containers: start."
+oct 05 18:20:56 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:20:56.638386235-05:00" level=info msg="Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip can be used to set a preferred IP address"
+oct 05 18:20:57 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:20:57.519367658-05:00" level=info msg="Loading containers: done."
+oct 05 18:21:00 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:21:00.374677828-05:00" level=info msg="Docker daemon" commit="27.5.1-0ubuntu3~24.04.2" containerd-snapshotter=false storage-driver=overlay2 version=27.5.1
+oct 05 18:21:00 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:21:00.387320660-05:00" level=info msg="Daemon has completed initialization"
+oct 05 18:21:18 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:21:18.176723034-05:00" level=info msg="API listen on /run/docker.sock"
+oct 05 18:21:18 sisadmi-Odoo systemd[1]: Started docker.service - Docker Application Container Engine.
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit docker.service has finished successfully[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit docker.service has finished successfully.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 190.[0m
+oct 05 18:26:47 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:26:47.329957082-05:00" level=info msg="Processing signal 'terminated'"
+oct 05 18:26:47 sisadmi-Odoo systemd[1]: Stopping docker.service - Docker Application Container Engine...
+[0;38;5;245m░░ [0m[0;32mSubject: A stop job for unit docker.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA stop job for unit docker.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 3514.[0m
+oct 05 18:26:47 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:26:47.331331674-05:00" level=info msg="stopping event stream following graceful shutdown" error="<nil>" module=libcontainerd namespace=moby
+oct 05 18:26:47 sisadmi-Odoo dockerd[1940]: time="2025-10-05T18:26:47.332435650-05:00" level=info msg="Daemon shutdown complete"
+oct 05 18:26:47 sisadmi-Odoo systemd[1]: docker.service: Deactivated successfully.
+[0;38;5;245m░░ [0m[0;32mSubject: Unit succeeded[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit docker.service has successfully entered the 'dead' state.[0m
+oct 05 18:26:47 sisadmi-Odoo systemd[1]: Stopped docker.service - Docker Application Container Engine.
+[0;38;5;245m░░ [0m[0;32mSubject: A stop job for unit docker.service has finished[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA stop job for unit docker.service has finished.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 3514 and the job result is done.[0m
+oct 05 18:26:47 sisadmi-Odoo systemd[1]: docker.service: Consumed 1.842s CPU time, 118.1M memory peak, 0B memory swap peak.
+[0;38;5;245m░░ [0m[0;32mSubject: Resources consumed by unit runtime[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe unit docker.service completed and consumed the indicated resources.[0m
+oct 05 18:26:47 sisadmi-Odoo systemd[1]: Starting docker.service - Docker Application Container Engine...
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit docker.service has begun execution[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit docker.service has begun execution.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 3514.[0m
+oct 05 18:26:47 sisadmi-Odoo dockerd[5675]: time="2025-10-05T18:26:47.401617465-05:00" level=info msg="Starting up"
+oct 05 18:26:47 sisadmi-Odoo dockerd[5675]: time="2025-10-05T18:26:47.402202660-05:00" level=info msg="OTEL tracing is not configured, using no-op tracer provider"
+oct 05 18:26:47 sisadmi-Odoo dockerd[5675]: time="2025-10-05T18:26:47.402275887-05:00" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+oct 05 18:26:48 sisadmi-Odoo dockerd[5675]: time="2025-10-05T18:26:48.319958870-05:00" level=info msg="[graphdriver] using prior storage driver: overlay2"
+oct 05 18:26:48 sisadmi-Odoo dockerd[5675]: time="2025-10-05T18:26:48.328116866-05:00" level=info msg="Loading containers: start."
+oct 05 18:26:49 sisadmi-Odoo dockerd[5675]: time="2025-10-05T18:26:49.864980729-05:00" level=info msg="Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip can be used to set a preferred IP address"
+oct 05 18:26:50 sisadmi-Odoo dockerd[5675]: time="2025-10-05T18:26:50.271099185-05:00" level=info msg="Loading containers: done."
+oct 05 18:26:50 sisadmi-Odoo dockerd[5675]: time="2025-10-05T18:26:50.602921552-05:00" level=info msg="Docker daemon" commit="27.5.1-0ubuntu3~24.04.2" containerd-snapshotter=false storage-driver=overlay2 version=27.5.1
+oct 05 18:26:50 sisadmi-Odoo dockerd[5675]: time="2025-10-05T18:26:50.603013394-05:00" level=info msg="Daemon has completed initialization"
+oct 05 18:26:52 sisadmi-Odoo dockerd[5675]: time="2025-10-05T18:26:52.772037913-05:00" level=info msg="API listen on /run/docker.sock"
+oct 05 18:26:52 sisadmi-Odoo systemd[1]: Started docker.service - Docker Application Container Engine.
+[0;38;5;245m░░ [0m[0;32mSubject: A start job for unit docker.service has finished successfully[0m
+[0;38;5;245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38;5;245m░░[0m [0;32mSupport: http://www.ubuntu.com/support[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mA start job for unit docker.service has finished successfully.[0m
+[0;38;5;245m░░[0m [0;32m[0m
+[0;38;5;245m░░[0m [0;32mThe job identifier is 3514.[0m
