@@ -1,13 +1,20 @@
 # companies/models.py
 from django.db import models
 from core.models import BaseModel
+from people.models import Person
 
 class Company(BaseModel):
     """
     Representa una empresa dentro del sistema.
     Multiempresa: cada registro puede pertenecer a una compañía.
     """
-
+    person = models.OneToOneField(
+    Person,
+    on_delete=models.CASCADE,
+    related_name="company_profile",
+    null=True,
+    blank=True
+)
     name = models.CharField(max_length=200, unique=True)
     trade_name = models.CharField(max_length=200, blank=True, null=True)
     ruc = models.CharField(max_length=20, unique=True)

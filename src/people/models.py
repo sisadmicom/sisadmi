@@ -97,7 +97,8 @@ class Employee(BaseModel):
     position = models.CharField(max_length=100)
     profession = models.CharField(max_length=100, blank=True, null=True)
     salary = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    hire_date = models.DateField(blank=True, null=True)
-
+    hire_date = models.DateField(blank=True, null=True)#fecha de ingreso
+    social_security_number = models.DecimalField(max_digits=10, decimal_places=0, default=0)
+    contact_person = models.OneToOneField(Person, on_delete=models.CASCADE, default=0, related_name="contact_profile")
     def __str__(self):
         return str(self.person)

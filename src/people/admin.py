@@ -3,13 +3,14 @@ from django import forms
 #from .models import Person
 
 #from django.contrib import admin
-from .models import Country, Province, Canton, Parish, Person, Gender
+from .models import Country, Province, Canton, Parish, Person, Gender, Employee
 # Register your models here.
 admin.site.register(Country)
 admin.site.register(Province)
 admin.site.register(Canton)
 admin.site.register(Parish)
 admin.site.register(Gender)
+admin.site.register(Employee)
 
 class PersonForm(forms.ModelForm):
     class Meta:
