@@ -35,9 +35,14 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_spectacular",
     # locales
+    #"common",
+    "companies",
     "core",
+    #"inventory",
+    "people",
+    #"proyects",
     "users",
-    "accounting",
+    #"accounting",
 ]
 
 MIDDLEWARE = [
@@ -99,3 +104,5 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
