@@ -1,0 +1,14 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Panel de Administración</a></h1>
+{% endblock %}
+
+{% block nav-global %}
+  <div style="margin-right: 15px;">
+    <a href="{% url 'admin:select-context' %}" style="color:white; text-decoration:none;">
+      🌐 Cambiar Empresa/Sucursal
+    </a>
+  </div>
+{% endblock %}

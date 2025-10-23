@@ -1,0 +1,24 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+  <h2>Seleccionar Empresa y Sucursal</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div>
+      <label>Empresa:</label>
+      <select name="company" required>
+        {% for c in companies %}
+          <option value="{{ c.id }}" {% if c.id|stringformat:"s" == active_company %}selected{% endif %}>{{ c.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label>Sucursal:</label>
+      <select name="branch">
+        {% for b in branches %}
+          <option value="{{ b.id }}" {% if b.id|stringformat:"s" == active_branch %}selected{% endif %}>{{ b.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="default">Guardar selección</button>
+  </form>
+{% endblock %}
