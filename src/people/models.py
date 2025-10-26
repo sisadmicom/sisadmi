@@ -1,6 +1,41 @@
 #people/models.py
 from django.db import models
 from core.models import BaseModel
+from django.core.exceptions import ValidationError
+from .validators import validar_identificacion_por_tipo
+"""
+class Person(models.Model):
+    
+    Representa una persona natural o jurídica.
+    
+
+    IDENTIFICATION_TYPES = [
+        ("CED", "Cédula"),
+        ("RUC", "RUC"),
+        ("PAS", "Pasaporte"),
+    ]
+
+    identification_type = models.CharField(
+        max_length=3,
+        choices=IDENTIFICATION_TYPES,
+        verbose_name="Tipo de identificación"
+    )
+    identification = models.CharField(
+        max_length=20,
+        unique=True,
+        verbose_name="Número de identificación"
+    )
+    full_name = models.CharField(max_length=255, verbose_name="Nombre completo")
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+
+    def clean(self):
+        super().clean()
+        validar_identificacion_por_tipo(self.identification, self.identification_type)
+
+    def __str__(self):
+        return f"{self.full_name} ({self.identification})"
+"""
 
 class Country(models.Model):
     name = models.CharField(max_length=100)
@@ -38,6 +73,22 @@ class Gender(models.Model):
 
 
 class Person(BaseModel):
+    IDENTIFICATION_TYPES = [
+        ("CED", "Cédula"),
+        ("RUC", "RUC"),
+        ("PAS", "Pasaporte"),
+    ]
+
+    identification_type = models.CharField(
+        max_length=3,default="CED",
+        choices=IDENTIFICATION_TYPES,
+        verbose_name="Tipo de identificación"
+    )
+    identification = models.CharField(
+        max_length=20,
+        unique=True,
+        verbose_name="Número de identificación"
+    )
     NATURAL = "N"
     LEGAL = "J"
     TYPE_CHOICES = [
@@ -45,7 +96,7 @@ class Person(BaseModel):
         (LEGAL, "Jurídica"),
     ]
 
-    identification = models.CharField(max_length=20, unique=True)
+    #identification = models.CharField(max_length=20, unique=True)
     name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150, blank=True)
     company_name = models.CharField(max_length=300, blank=True)
@@ -64,6 +115,10 @@ class Person(BaseModel):
         blank=True,
         related_name='created_people'  # 👈 evita el conflicto con user.person
     )
+
+    def clean(self):
+        super().clean()
+        validar_identificacion_por_tipo(self.identification, self.identification_type)
 
     class Meta:
         verbose_name = "Persona"

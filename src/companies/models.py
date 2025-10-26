@@ -37,5 +37,12 @@ class Branch(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="branches")
     name = models.CharField(max_length=150)
     address = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Sucursal"
+        verbose_name_plural = "Sucursales"
+        ordering = ["name"]
+    
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.company})" if self.company else self.username
+        #({self.company})

@@ -1,20 +1,17 @@
-# Django framework
-Django==5.0
+# --- Framework principal ---
+Django==5.0.6
 
-# API REST
-djangorestframework
-drf-spectacular
+# --- API REST ---
+djangorestframework==3.15.2
+drf-spectacular==0.27.2
+djangorestframework-simplejwt==5.3.1
 
-# PostgreSQL driver
-psycopg2-binary
+# --- Configuración y entorno ---
+django-environ==0.11.2
+django-filter==24.3
 
-# Manejo de variables de entorno
-django-environ
+# --- Base de datos ---
+psycopg2-binary==2.9.9
 
-# Filtrado avanzado en DRF
-django-filter
-
-# Servidor de producción
-gunicorn
-
-django-environ
+# --- Producción ---
+gunicorn==21.2.0

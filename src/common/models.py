@@ -1,3 +1,8 @@
+from django.contrib import admin
+from companies.models import Company
+
+admin.site.register(Company)
+"""
 from django.db import models
 from django.conf import settings
 
@@ -26,3 +31,4 @@ class TimeStampedModel(models.Model):
 
     class Meta:
         abstract = True
+        """

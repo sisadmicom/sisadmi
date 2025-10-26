@@ -1,6 +1,7 @@
 from django.contrib import admin
+from core.models import BaseModel, TimeStampedModel  # solo si los necesitas como referencia
 
-from .models import BaseModel, TimeStampedModel
-# Register your models here.
-admin.site.register(BaseModel)
-admin.site.register(TimeStampedModel)
+# No registres modelos abstractos
+# Si tienes modelos concretos, regístralos así:
+# from companies.models import Company
+# admin.site.register(Company)
