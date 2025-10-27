@@ -34,9 +34,9 @@ class Company(BaseModel):
 
 
 class Branch(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="branches")
-    name = models.CharField(max_length=150)
-    address = models.TextField(blank=True, null=True)
+    company = models.ForeignKey(Company, verbose_name="Empresa", on_delete=models.CASCADE, related_name="branches")
+    name = models.CharField("Sucursal", max_length=150)
+    address = models.TextField("Direccion", blank=True, null=True)
 
     class Meta:
         verbose_name = "Sucursal"

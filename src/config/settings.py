@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     #"common",
     "companies",
     "core",
-    #"inventory",
+    "inventory",
     "people",
     #"proyects",
     "users",

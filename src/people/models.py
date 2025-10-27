@@ -40,6 +40,11 @@ class Person(models.Model):
 class Country(models.Model):
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=10, unique=True)
+
+    class Meta:
+        verbose_name = "Pais"
+        verbose_name_plural = "Paises"
+
     def __str__(self):
         return self.name
 
@@ -47,6 +52,11 @@ class Country(models.Model):
 class Province(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="provinces")
     name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "Provincia"
+        verbose_name_plural = "Provincias"
+
     def __str__(self):
         return self.name
 
@@ -54,6 +64,7 @@ class Province(models.Model):
 class Canton(models.Model):
     province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name="cantons")
     name = models.CharField(max_length=100)
+
     def __str__(self):
         return self.name
 
@@ -61,13 +72,23 @@ class Canton(models.Model):
 class Parish(models.Model):
     canton = models.ForeignKey(Canton, on_delete=models.CASCADE, related_name="parishes")
     name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "Parroquia"
+        verbose_name_plural = "Parroquias"
+
     def __str__(self):
         return self.name
 
 
 class Gender(models.Model):
-    name = models.CharField(max_length=100)
-    symbol = models.CharField(max_length=25)
+    name = models.CharField("Genero", max_length=100)
+    symbol = models.CharField("Simbolo", max_length=25)
+
+    class Meta:
+        verbose_name = "Genero"
+        verbose_name_plural = "Generos"
+
     def __str__(self):
         return f"{self.name} {self.symbol}" if self.name else self.name
 
@@ -97,15 +118,15 @@ class Person(BaseModel):
     ]
 
     #identification = models.CharField(max_length=20, unique=True)
-    name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150, blank=True)
-    company_name = models.CharField(max_length=300, blank=True)
-    person_type = models.CharField(max_length=1, choices=TYPE_CHOICES, default=NATURAL)
-    email = models.EmailField(blank=True, null=True)
-    birth_date = models.DateField(blank=True, null=True)
-    gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True)
-    parish = models.ForeignKey(Parish, on_delete=models.SET_NULL, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
+    name = models.CharField("Nombres", max_length=150)
+    last_name = models.CharField("Apellidos", max_length=150, blank=True)
+    company_name = models.CharField("Compañia", max_length=300, blank=True)
+    person_type = models.CharField("Tipo de Persona", max_length=1, choices=TYPE_CHOICES, default=NATURAL)
+    email = models.EmailField("Correo", blank=True, null=True)
+    birth_date = models.DateField("Fecha de nacimiento", blank=True, null=True)
+    gender = models.ForeignKey(Gender, related_name="Genero", on_delete=models.SET_NULL, null=True)
+    parish = models.ForeignKey(Parish, verbose_name="Ubicacion", on_delete=models.SET_NULL, null=True)
+    phone = models.CharField("Telefono", max_length=20, blank=True, null=True)
 
     # Auditoría
     created_by = models.ForeignKey(
@@ -134,6 +155,10 @@ class Client(BaseModel):
     zone = models.CharField(max_length=100, blank=True, null=True)
     credit_limit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     notes = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "CLiente"
+        verbose_name_plural = "Clientes"
 
     def __str__(self):
         return str(self.person)

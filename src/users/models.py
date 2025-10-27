@@ -10,8 +10,8 @@ class User(AbstractUser):
     active_branch = models.ForeignKey(
         Branch, null=True, blank=True, on_delete=models.SET_NULL, related_name="active_users"
     )
-    company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, blank=True,related_name="companyes")
-    branch = models.ForeignKey(Branch, on_delete=models.SET_NULL, null=True, blank=True,related_name="branchs")
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, blank=True,related_name="users")
+    branch = models.ForeignKey(Branch, on_delete=models.SET_NULL, null=True, blank=True,related_name="users")
     '''company = models.ForeignKey(
         'companies.Company',
         on_delete=models.SET_NULL,
