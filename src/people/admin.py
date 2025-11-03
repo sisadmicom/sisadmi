@@ -24,12 +24,12 @@ class PersonForm(forms.ModelForm):
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
     form = PersonForm
-    list_display = ('identification', 'person_type', 'name', 'last_name', 'company_name')
+    list_display = ('identification', 'person_type', 'name', 'last_name')
 
     # Esto ayuda a mantener los campos agrupados
     fieldsets = (
         (None, {
-            'fields': ('person_type', 'identification', 'name', 'last_name', 'company_name')
+            'fields': ('person_type', 'identification', 'name', 'last_name')
         }),
         ('Información adicional', {
             'fields': ('email', 'birth_date', 'gender', 'parish', 'phone')

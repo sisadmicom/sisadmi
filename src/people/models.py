@@ -3,39 +3,8 @@ from django.db import models
 from core.models import BaseModel
 from django.core.exceptions import ValidationError
 from .validators import validar_identificacion_por_tipo
-"""
-class Person(models.Model):
-    
-    Representa una persona natural o jurídica.
-    
-
-    IDENTIFICATION_TYPES = [
-        ("CED", "Cédula"),
-        ("RUC", "RUC"),
-        ("PAS", "Pasaporte"),
-    ]
-
-    identification_type = models.CharField(
-        max_length=3,
-        choices=IDENTIFICATION_TYPES,
-        verbose_name="Tipo de identificación"
-    )
-    identification = models.CharField(
-        max_length=20,
-        unique=True,
-        verbose_name="Número de identificación"
-    )
-    full_name = models.CharField(max_length=255, verbose_name="Nombre completo")
-    email = models.EmailField(blank=True, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
-
-    def clean(self):
-        super().clean()
-        validar_identificacion_por_tipo(self.identification, self.identification_type)
-
-    def __str__(self):
-        return f"{self.full_name} ({self.identification})"
-"""
+#from companies.models import Company
+from smart_selects.db_fields import ChainedForeignKey # pyright: ignore[reportMissingImports]
 
 class Country(models.Model):
     name = models.CharField(max_length=100)
@@ -120,11 +89,11 @@ class Person(BaseModel):
     #identification = models.CharField(max_length=20, unique=True)
     name = models.CharField("Nombres", max_length=150)
     last_name = models.CharField("Apellidos", max_length=150, blank=True)
-    company_name = models.CharField("Compañia", max_length=300, blank=True)
+
     person_type = models.CharField("Tipo de Persona", max_length=1, choices=TYPE_CHOICES, default=NATURAL)
     email = models.EmailField("Correo", blank=True, null=True)
     birth_date = models.DateField("Fecha de nacimiento", blank=True, null=True)
-    gender = models.ForeignKey(Gender, related_name="Genero", on_delete=models.SET_NULL, null=True)
+    gender = models.ForeignKey(Gender, verbose_name="Genero", on_delete=models.SET_NULL, null=True)
     parish = models.ForeignKey(Parish, verbose_name="Ubicacion", on_delete=models.SET_NULL, null=True)
     phone = models.CharField("Telefono", max_length=20, blank=True, null=True)
 

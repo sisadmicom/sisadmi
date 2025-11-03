@@ -10,6 +10,9 @@ class ActiveCompanyMiddleware(MiddlewareMixin):
         request.active_company = None
         request.active_branch = None
 
+        #if not request.user.is_authenticated:
+        #    return
+        
         # ✅ Evita error si request.user aún no existe
         if not hasattr(request, "user") or not request.user.is_authenticated:
             return

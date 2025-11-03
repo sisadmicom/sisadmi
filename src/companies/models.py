@@ -15,11 +15,11 @@ class Company(BaseModel):
     null=True,
     blank=True
 )
-    name = models.CharField(max_length=200, unique=True)
-    trade_name = models.CharField(max_length=200, blank=True, null=True)
-    ruc = models.CharField(max_length=20, unique=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    phone = models.CharField(max_length=50, blank=True, null=True)
+    name = models.CharField("Empresa", max_length=200, unique=True)
+    trade_name = models.CharField("Nombre_Comercial", max_length=200, blank=True, null=True)
+    ruc = models.CharField("Nro. Identificacion", max_length=20, unique=True)
+    address = models.CharField("Direccion", max_length=255, blank=True, null=True)
+    phone = models.CharField("Telefono", max_length=50, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     website = models.URLField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
@@ -32,8 +32,7 @@ class Company(BaseModel):
     def __str__(self):
         return self.name
 
-
-class Branch(models.Model):
+class Branch(BaseModel):
     company = models.ForeignKey(Company, verbose_name="Empresa", on_delete=models.CASCADE, related_name="branches")
     name = models.CharField("Sucursal", max_length=150)
     address = models.TextField("Direccion", blank=True, null=True)
