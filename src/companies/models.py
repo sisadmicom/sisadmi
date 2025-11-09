@@ -33,7 +33,7 @@ class Company(BaseModel):
         return self.name
 
 class Branch(BaseModel):
-    company = models.ForeignKey(Company, verbose_name="Empresa", on_delete=models.CASCADE, related_name="branches")
+    company = models.ForeignKey(Company, verbose_name="Empresa", on_delete=models.CASCADE,null=True,blank=True, related_name="branches")
     name = models.CharField("Sucursal", max_length=150)
     address = models.TextField("Direccion", blank=True, null=True)
 

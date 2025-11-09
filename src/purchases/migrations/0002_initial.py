@@ -10,50 +10,63 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('companies', '0001_initial'),
-        ('people', '0001_initial'),
+        ('companies', '0002_initial'),
+        ('core', '0002_initial'),
+        ('inventory', '0002_initial'),
+        ('people', '0002_initial'),
+        ('purchases', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='branch',
+            model_name='purchaseheader',
             name='created_by',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='%(class)s_created', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
-            model_name='branch',
+            model_name='purchaseheader',
+            name='flow',
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='core.movementflow', verbose_name='Flujo de inventario'),
+        ),
+        migrations.AddField(
+            model_name='purchaseheader',
+            name='supplier',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='people.person', verbose_name='Proveedor'),
+        ),
+        migrations.AddField(
+            model_name='purchaseheader',
             name='updated_by',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='%(class)s_updated', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
-            model_name='company',
+            model_name='purchasemovement',
             name='branch',
             field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='%(class)s_records', to='companies.branch'),
         ),
         migrations.AddField(
-            model_name='company',
+            model_name='purchasemovement',
             name='company',
             field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='%(class)s_records', to='companies.company'),
         ),
         migrations.AddField(
-            model_name='company',
+            model_name='purchasemovement',
             name='created_by',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='%(class)s_created', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
-            model_name='company',
-            name='person',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='company_profile', to='people.person'),
+            model_name='purchasemovement',
+            name='header',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='movements', to='purchases.purchaseheader'),
         ),
         migrations.AddField(
-            model_name='company',
+            model_name='purchasemovement',
+            name='product',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='inventory.product', verbose_name='Producto'),
+        ),
+        migrations.AddField(
+            model_name='purchasemovement',
             name='updated_by',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='%(class)s_updated', to=settings.AUTH_USER_MODEL),
-        ),
-        migrations.AddField(
-            model_name='branch',
-            name='company',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='branches', to='companies.company', verbose_name='Empresa'),
         ),
     ]

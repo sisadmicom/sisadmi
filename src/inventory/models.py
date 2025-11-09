@@ -84,11 +84,11 @@ class Product(BaseModel):
     brand = models.ForeignKey(Brand, verbose_name="Marca", on_delete=models.SET_NULL, null=True)
     price = models.DecimalField("Precio", max_digits=10, decimal_places=2)
     stock = models.DecimalField("Stop", max_digits=10, decimal_places=2, default=0)
-    Extent = models.ForeignKey(Extent, verbose_name="Medida", on_delete=models.SET_NULL, null=True)
+    extent = models.ForeignKey(Extent, verbose_name="Medida", on_delete=models.SET_NULL, null=True)
     warehouse = models.ForeignKey(Warehouse, verbose_name="Almacen", on_delete=models.SET_NULL, null=True)  
     Hanger = models.ForeignKey(Hanger, verbose_name="Percha", on_delete=models.SET_NULL, null=True)
-    company = models.ForeignKey(Company, verbose_name="Empresa", on_delete=models.SET_NULL, null=True, blank=True,related_name="products")
-    branch = models.ForeignKey(Branch, verbose_name="Sucursal", on_delete=models.SET_NULL, null=True, blank=True,related_name="products")
+    #company = models.ForeignKey(Company, verbose_name="Empresa", on_delete=models.SET_NULL, null=True, blank=True,related_name="products")
+    #branch = models.ForeignKey(Branch, verbose_name="Sucursal", on_delete=models.SET_NULL, null=True, blank=True,related_name="products")
 
     class Meta:
         verbose_name = "Producto"

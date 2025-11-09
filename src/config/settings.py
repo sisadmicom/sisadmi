@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "people",
     #"proyects",
     "users",
+    "purchases",
     #"accounting",
 ]
 

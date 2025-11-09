@@ -96,7 +96,7 @@ class Person(BaseModel):
     gender = models.ForeignKey(Gender, verbose_name="Genero", on_delete=models.SET_NULL, null=True)
     parish = models.ForeignKey(Parish, verbose_name="Ubicacion", on_delete=models.SET_NULL, null=True)
     phone = models.CharField("Telefono", max_length=20, blank=True, null=True)
-
+    """
     # Auditoría
     created_by = models.ForeignKey(
         'users.User',
@@ -104,7 +104,7 @@ class Person(BaseModel):
         null=True,
         blank=True,
         related_name='created_people'  # 👈 evita el conflicto con user.person
-    )
+    )"""
 
     def clean(self):
         super().clean()
@@ -119,7 +119,7 @@ class Person(BaseModel):
 
 
 class Client(BaseModel):
-    person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="client_profile")
+    #person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="client_profile")
     client_type = models.CharField(max_length=50, blank=True, null=True)
     zone = models.CharField(max_length=100, blank=True, null=True)
     credit_limit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
@@ -151,3 +151,4 @@ class Employee(BaseModel):
     contact_person = models.OneToOneField(Person, on_delete=models.CASCADE, default=0, related_name="contact_profile")
     def __str__(self):
         return str(self.person)
+    
