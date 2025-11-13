@@ -2,6 +2,8 @@
 from django.db import models
 from django.conf import settings
 
+#from core.middleware import get_current_user
+
 class BaseModel(models.Model):
     id = models.BigAutoField(primary_key=True)
 
@@ -45,6 +47,19 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
         ordering = ['-created_at']
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        from core.middleware import get_current_user
+        user = get_current_user()
+        if not self.pk:
+            if not self.created_by:
+                self.created_by = user
+        else:
+            self.updated_by = user
+        super().save(*args, **kwargs)
 
 
 class TimeStampedModel(models.Model):

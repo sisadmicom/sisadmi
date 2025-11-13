@@ -25,6 +25,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Application definition
 INSTALLED_APPS = [
+    "users",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,13 +38,14 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_spectacular",
     # locales
+    
     #"common",
     "companies",
     "core",
     "inventory",
     "people",
     #"proyects",
-    "users",
+    
     "purchases",
     #"accounting",
 ]
@@ -62,6 +64,7 @@ MIDDLEWARE = [
     'core.middleware.ActiveCompanyMiddleware',
 
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.CurrentUserMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -113,6 +116,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#AUTH_USER_MODEL = "users.User"
 
 AUTH_USER_MODEL = 'users.User'
 

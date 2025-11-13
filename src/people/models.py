@@ -133,12 +133,7 @@ class Client(BaseModel):
         return str(self.person)
 
 
-class Supplier(BaseModel):
-    person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="supplier_profile")
-    contact_person = models.CharField(max_length=150, blank=True)
 
-    def __str__(self):
-        return str(self.person)
 
 
 class Employee(BaseModel):
