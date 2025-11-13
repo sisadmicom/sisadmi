@@ -165,5 +165,5 @@ class Command(BaseCommand):
         )
 
 
-        self.stdout.write("🎉 Datos iniciales cargados exitosamente.")
+        self.stdout.write("🎉 Datos iniciales cargados exitosamente.!")
         
