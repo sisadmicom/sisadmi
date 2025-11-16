@@ -19,7 +19,7 @@ class Country(models.Model):
 
 
 class Province(models.Model):
-    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="provinces")
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True, blank=True, related_name="provinces")
     name = models.CharField(max_length=100)
 
     class Meta:
@@ -31,7 +31,7 @@ class Province(models.Model):
 
 
 class Canton(models.Model):
-    province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name="cantons")
+    province = models.ForeignKey(Province, on_delete=models.CASCADE, blank=True, null=True, related_name="cantons")
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -39,7 +39,7 @@ class Canton(models.Model):
 
 
 class Parish(models.Model):
-    canton = models.ForeignKey(Canton, on_delete=models.CASCADE, related_name="parishes")
+    canton = models.ForeignKey(Canton, on_delete=models.CASCADE, blank=True, null=True, related_name="parishes")
     name = models.CharField(max_length=100)
 
     class Meta:
@@ -137,7 +137,7 @@ class Client(BaseModel):
 
 
 class Employee(BaseModel):
-    person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="employee_profile")
+    person = models.OneToOneField(Person, on_delete=models.CASCADE, blank=True, null=True, related_name="employee_profile")
     position = models.CharField(max_length=100)
     profession = models.CharField(max_length=100, blank=True, null=True)
     salary = models.DecimalField(max_digits=10, decimal_places=2, default=0)

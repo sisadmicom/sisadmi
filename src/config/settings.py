@@ -25,7 +25,13 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Application definition
 INSTALLED_APPS = [
+    "people",
+    "companies",
     "users",
+    "core",
+    "inventory",
+    
+    "purchases",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,16 +43,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "drf_spectacular",
-    # locales
     
-    #"common",
-    "companies",
-    "core",
-    "inventory",
-    "people",
-    #"proyects",
     
-    "purchases",
+    
     #"accounting",
 ]
 
