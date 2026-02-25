@@ -157,7 +157,7 @@ class Command(BaseCommand):
         )
 
         gender, createdcore=Gender.objects.get_or_create(
-            id=1,
+            id=2,
             defaults={
                 "name": "FEMENINO",
                 "symbol": "M",

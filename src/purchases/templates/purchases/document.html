@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Compra {{ purchase.code }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { margin-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #aaa; padding: 8px; text-align: left; }
+        th { background: #f0f0f0; }
+        .header-box { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<h2>Documento de Compra</h2>
+<p><strong>Código:</strong> {{ purchase.code }}</p>
+
+<div class="header-box">
+    <h3>Datos del Proveedor</h3>
+
+    <p><strong>Razón Social:</strong> {{ purchase.supplier.person.full_name }}</p>
+    <p><strong>Identificación:</strong> {{ purchase.supplier.person.document_number }}</p>
+
+    {% if purchase.supplier.contact_person %}
+        <p><strong>Contacto:</strong> {{ purchase.supplier.contact_person }}</p>
+    {% endif %}
+
+    <p><strong>Número de factura:</strong> {{ purchase.invoice_number }}</p>
+    <p><strong>Fecha:</strong> {{ purchase.date|date:"d/m/Y" }}</p>
+</div>
+
+<h3>Detalles de la Compra</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for mov in purchase.movements.all %}
+        <tr>
+            <td>{{ mov.description }}</td>
+            <td>{{ mov.quantity }}</td>
+            <td>{{ mov.price }}</td>
+            <td>{{ mov.amount }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4" style="text-align:center;">No hay detalles</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
