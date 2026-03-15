@@ -6,7 +6,11 @@ from people.models import Person
 class Supplier(BaseModel):
     person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="supplier_profile")
     contact_person = models.CharField(max_length=150, blank=True)
-
+    caducidad = models.DateField("Fecha del caducidad", auto_now_add=True)
+    establecimiento = models.CharField("establecimiento", max_length=3, blank=True, null=True)
+    punto = models.CharField("Punto de emisiòn", max_length=3, blank=True, null=True)
+    count = models.CharField("Cuenta contable", max_length=15, blank=True, null=True)
+    web = models.CharField("Pagina web", max_length=50, blank=True, null=True)
     class Meta:
         db_table = "purchases_supplier"  # 👈 usa el nombre de la tabla original
         verbose_name = "Proveedor"

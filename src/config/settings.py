@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "inventory",
     
     "purchases",
+    "documents",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

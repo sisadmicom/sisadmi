@@ -1,0 +1,26 @@
+<h2>Nueva Compra</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div>
+        {{ form.as_p }}
+    </div>
+
+    <h3>Detalles</h3>
+
+    {{ formset.management_form }}
+
+    <table>
+        {% for form in formset %}
+        <tr>
+            <td>{{ form.description }}</td>
+            <td>{{ form.quantity }}</td>
+            <td>{{ form.price }}</td>
+            <td>{{ form.DELETE }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <button type="submit">Guardar</button>
+</form>

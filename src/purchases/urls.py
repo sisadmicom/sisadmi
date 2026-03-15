@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path("document/<int:pk>/", views.purchase_document, name="purchase_document"),
+    path("create/", views.purchase_create, name="purchase_create"),
 ]

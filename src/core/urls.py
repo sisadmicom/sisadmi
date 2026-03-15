@@ -8,5 +8,9 @@ urlpatterns = [
 
 urlpatterns = [
     path("select-context/", select_context, name="select_context"),
+    #path("purchases/", include("purchases.urls")),
+]
+
+rlpatterns = [
     path("purchases/", include("purchases.urls")),
 ]

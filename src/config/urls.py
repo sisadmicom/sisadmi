@@ -1,3 +1,4 @@
+#config/urls
 """
 URL configuration for config project.
 
@@ -67,4 +68,6 @@ from core.views import test_context
 
 urlpatterns += [
     path("api/test-context/", test_context),
+    path("core/", include("core.urls")),
 ]
+
