@@ -137,3 +137,15 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
 }
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = "heraclitocc07@gmail.com"
+EMAIL_HOST_PASSWORD = "123456789"
+
+DEFAULT_FROM_EMAIL = "heraclitocc07@gmail.com"

@@ -1,0 +1,35 @@
+from decimal import Decimal
+
+
+class TaxService:
+
+    @staticmethod
+    def compute_line_tax(line):
+
+        if not line.tax:
+            return Decimal("0")
+
+        base = line.qty * line.price
+
+        tax_rate = line.tax.rate / 100
+
+        tax_amount = base * tax_rate
+
+        return tax_amount
+"""
+Agregar calculo dent4ro del loop de lineas
+    from accounting.services.tax_service import TaxService
+    subtotal = qty * price
+
+tax_amount = TaxService.compute_line_tax(line)
+
+BaseDocumentLine.objects.create(
+    document=document,
+    product=line["product"],
+    qty=qty,
+    price=price,
+    subtotal=subtotal,
+    tax=line.get("tax"),
+    tax_amount=tax_amount
+)
+"""

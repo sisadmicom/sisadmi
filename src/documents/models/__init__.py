@@ -4,3 +4,4 @@ from .sequence import *
 from .document_type import *
 from .document_status import *
 from .document_settings import *
+from .document_workflow import *
