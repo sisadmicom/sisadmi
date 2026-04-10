@@ -1,3 +1,4 @@
+#document_status.py
 from django.db import models
 
 
@@ -29,4 +30,4 @@ class DocumentStatus(models.Model):
         verbose_name_plural = "Estados de Documento"
 
     def __str__(self):
-        return self.name
+        return f"{self.code} - {self.name}"

@@ -1,3 +1,4 @@
+#document_type.py
 from django.db import models
 
 
@@ -17,7 +18,7 @@ class DocumentType(models.Model):
         null=True
     )
 
-    use_sequence = models.BooleanField(
+    """use_sequence = models.BooleanField(
         default=True
     )
 
@@ -26,7 +27,7 @@ class DocumentType(models.Model):
         on_delete=models.PROTECT,
         null=True,
         blank=True
-    )
+    )"""
 
     active = models.BooleanField(
         default=True
@@ -37,4 +38,4 @@ class DocumentType(models.Model):
         verbose_name_plural = "Tipos de Documento"
 
     def __str__(self):
-        return self.name
+        return f"{self.code} - {self.name}"

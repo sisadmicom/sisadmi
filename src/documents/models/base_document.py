@@ -1,5 +1,7 @@
 from django.db import models
 
+from config import settings
+
 
 class BaseDocument(models.Model):
 
@@ -42,7 +44,8 @@ class BaseDocument(models.Model):
     )
 
     created_by = models.ForeignKey(
-        "auth.User",
+        #"auth.User",
+        settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name="+"
     )
@@ -97,9 +100,15 @@ class BaseDocumentLine(models.Model):
     )
 
     product = models.ForeignKey(
+        "inventory.Product",
+        verbose_name="Producto",
+        on_delete=models.PROTECT
+    )
+    """product = models.ForeignKey(
         "products.Product",
         on_delete=models.PROTECT
     )
+    """
 
     qty = models.DecimalField(max_digits=10, decimal_places=2)
     price = models.DecimalField(max_digits=10, decimal_places=2)

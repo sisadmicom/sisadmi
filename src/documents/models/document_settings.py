@@ -1,3 +1,4 @@
+#document_settings.py
 from django.db import models
 
 
@@ -10,7 +11,9 @@ class DocumentSettings(models.Model):
 
     sequence = models.ForeignKey(
         "documents.DocumentSequence",
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True
     )
 
     initial_status = models.ForeignKey(

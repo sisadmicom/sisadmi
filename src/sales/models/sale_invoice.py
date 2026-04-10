@@ -21,35 +21,34 @@ class SaleInvoiceLine(BaseDocumentLine):
         db_table = "sale_invoice_line"
 
 
-def calculate_totals(self):
+    def calculate_totals(self):
 
-    subtotal = 0
+        subtotal = 0
 
-    for line in self.lines.all():
-        line.subtotal = line.qty * line.price
-        line.save()
+        for line in self.lines.all():
+            line.subtotal = line.qty * line.price
+            line.save()
+            subtotal += line.subtotal
 
-        subtotal += line.subtotal
+        self.subtotal = subtotal
+        self.tax_total = subtotal * 0.15  # IVA Ecuador
+        self.total = self.subtotal + self.tax_total
 
-    self.subtotal = subtotal
-    self.tax_total = subtotal * 0.15  # IVA Ecuador
-    self.total = self.subtotal + self.tax_total
+        self.save()
 
-    self.save()
+        def action_confirm(self):
 
-def action_confirm(self):
+            self.calculate_totals()
 
-    self.calculate_totals()
+            self.state = "confirmed"
+            self.save()
 
-    self.state = "confirmed"
-    self.save()
+        def action_done(self):
 
-def action_done(self):
+            self.state = "done"
+            self.save()
 
-    self.state = "done"
-    self.save()
-
-    # aquí entra SRI
-    
-    process_invoice.delay(self.id)
+            # aquí entra SRI
+            
+            process_invoice.delay(self.id)
 

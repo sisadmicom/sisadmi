@@ -26,6 +26,10 @@ class DocumentSequence(models.Model):
         default=9
     )
 
+    establishment = models.CharField(max_length=3)
+    
+    emission_point = models.CharField(max_length=3)
+
     def next_number(self):
 
         self.last_number += 1
@@ -34,6 +38,7 @@ class DocumentSequence(models.Model):
         number = str(self.last_number).zfill(self.padding)
 
         if self.prefix:
-            return f"{self.prefix}{number}"  if self.name else self.name
+            return f"{self.prefix}{number}"  
+            #if self.name else self.name
 
         return number

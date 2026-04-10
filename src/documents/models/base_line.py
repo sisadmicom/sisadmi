@@ -3,8 +3,13 @@ from django.db import models
 
 class BaseDocumentLine(models.Model):
 
-    product = models.ForeignKey(
+    """product = models.ForeignKey(
         "products.Product",
+        on_delete=models.PROTECT
+    )"""
+    product = models.ForeignKey(
+        "inventory.Product",
+        verbose_name="Producto",
         on_delete=models.PROTECT
     )
 

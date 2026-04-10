@@ -14,3 +14,5 @@ urlpatterns = [
 rlpatterns = [
     path("purchases/", include("purchases.urls")),
 ]
+
+path("", include("sales.urls")),
