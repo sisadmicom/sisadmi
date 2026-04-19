@@ -11,8 +11,10 @@ urlpatterns = [
     #path("purchases/", include("purchases.urls")),
 ]
 
-rlpatterns = [
+urlpatterns = [
     path("purchases/", include("purchases.urls")),
 ]
 
-path("", include("sales.urls")),
+urlpatterns = [
+    path("sales", include("sales.urls")),
+]

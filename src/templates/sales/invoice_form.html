@@ -1,0 +1,109 @@
+<form method="post" id="invoice-form">
+    {% csrf_token %}
+
+    <h2>Factura</h2>
+
+    <!-- Cliente -->
+    <label>Cliente</label>
+    <select name="customer" required>
+        {% for c in customers %}
+        <option value="{{ c.id }}">{{ c }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <!-- Tabla tipo Odoo -->
+    <table border="1" width="100%" id="lines-table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="lines-body"></tbody>
+    </table>
+
+    <br>
+    <button type="button" onclick="addLine()">➕ Agregar línea</button>
+
+    <br><br>
+
+    <h3>Subtotal: <span id="subtotal">0.00</span></h3>
+    <h3>IVA (15%): <span id="tax">0.00</span></h3>
+    <h2>Total: <span id="total">0.00</span></h2>
+
+    <button type="submit">Guardar Factura</button>
+</form>
+
+<script>
+let products = {{ products_json|safe }};
+
+function addLine() {
+    let row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>
+            <select class="product">
+                ${products.map(p => `<option value="${p.id}" data-price="${p.price}">${p.name}</option>`).join("")}
+            </select>
+        </td>
+        <td><input type="number" class="qty" value="1" step="0.01"></td>
+        <td><input type="number" class="price" step="0.01"></td>
+        <td class="line-subtotal">0.00</td>
+        <td><button type="button" onclick="removeLine(this)">❌</button></td>
+    `;
+
+    document.getElementById("lines-body").appendChild(row);
+
+    bindEvents(row);
+    updateLine(row);
+}
+
+function removeLine(btn) {
+    btn.closest("tr").remove();
+    calculateTotals();
+}
+
+function bindEvents(row) {
+    row.querySelector(".product").addEventListener("change", function() {
+        let price = this.selectedOptions[0].dataset.price;
+        row.querySelector(".price").value = price;
+        updateLine(row);
+    });
+
+    row.querySelector(".qty").addEventListener("input", () => updateLine(row));
+    row.querySelector(".price").addEventListener("input", () => updateLine(row));
+}
+
+function updateLine(row) {
+    let qty = parseFloat(row.querySelector(".qty").value) || 0;
+    let price = parseFloat(row.querySelector(".price").value) || 0;
+
+    let subtotal = qty * price;
+    row.querySelector(".line-subtotal").innerText = subtotal.toFixed(2);
+
+    calculateTotals();
+}
+
+function calculateTotals() {
+    let subtotal = 0;
+
+    document.querySelectorAll(".line-subtotal").forEach(el => {
+        subtotal += parseFloat(el.innerText) || 0;
+    });
+
+    let tax = subtotal * 0.15;
+    let total = subtotal + tax;
+
+    document.getElementById("subtotal").innerText = subtotal.toFixed(2);
+    document.getElementById("tax").innerText = tax.toFixed(2);
+    document.getElementById("total").innerText = total.toFixed(2);
+}
+
+// Inicial
+addLine();
+</script>

@@ -3,6 +3,7 @@ FROM python:3.12-slim
 
 # Directorio de trabajo
 WORKDIR /app
+#WORKDIR /app/src
 
 # Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \

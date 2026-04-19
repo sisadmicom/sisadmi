@@ -1,29 +1,49 @@
-from django.shortcuts import render
-
-# Create your views here.
-# sales/views.py
 import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-
+from django.shortcuts import render, redirect
+from inventory.models import Product
+from people.models import Person
 from .models import SaleInvoice, SaleInvoiceLine
 
-@csrf_exempt
-def create_invoice(request):
+def invoice_create(request):
+
+    products = Product.objects.all()
+    customers = Person.objects.all()
+
     if request.method == "POST":
-        data = json.loads(request.body)
+
+        customer_id = request.POST.get("customer")
 
         invoice = SaleInvoice.objects.create(
-            # ajusta según tu modelo
-            customer_name=data.get("customer", "Consumidor Final")
+            customer_id=customer_id,
+            company_id=1,
+            document_type_id=1,
+            date="2026-01-01",
+            created_by=request.user
         )
 
-        for line in data.get("lines", []):
+        # Procesar líneas
+        for i in range(len(request.POST.getlist("product[]"))):
             SaleInvoiceLine.objects.create(
                 document=invoice,
-                product_name=line["product"],
-                quantity=line["qty"],
-                price=line["price"]
+                product_id=request.POST.getlist("product[]")[i],
+                qty=request.POST.getlist("qty[]")[i],
+                price=request.POST.getlist("price[]")[i],
             )
 
-        return JsonResponse({"status": "ok", "invoice_id": invoice.id})
+        invoice.calculate_totals()
+
+        return redirect("invoice_list")
+
+    products_json = json.dumps([
+        {"id": p.id, "name": p.name, "price": float(p.price)}
+        for p in products
+    ])
+    #/home/sisadmi/workspace/sisadmi/src/sales/templates/sales/invoice/invoice_form.html
+    return render(request, "sales/invoice/invoice_detail.html", {
+        "invoice": invoice
+    })
+    """return render(request, "sales/invoice_form.html", {
+        "products": products,
+        "customers": customers,
+        "products_json": products_json
+    })"""

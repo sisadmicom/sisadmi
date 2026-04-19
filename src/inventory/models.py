@@ -1,3 +1,4 @@
+#/sisadhome/mi/workspace/sisadmi/src/inventory/models.py
 from django.db import models      # 👈 siempre primero
 from core.models import BaseModel
 from companies.models import Company, Branch 

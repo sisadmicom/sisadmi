@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="width: 80%; margin: auto; font-family: Arial;">
+
+    <div style="display:flex; justify-content: space-between;">
+        <h2>Factura</h2>
+        <h3>#{{ invoice.number }}</h3>
+    </div>
+
+    <hr>
+
+    <div style="display:flex; justify-content: space-between;">
+        <div>
+            <strong>Cliente:</strong> {{ invoice.customer }}<br>
+            <strong>Fecha:</strong> {{ invoice.date }}
+        </div>
+
+        <div>
+            <strong>Estado:</strong> {{ invoice.status }}<br>
+            <strong>Empresa:</strong> {{ invoice.company }}
+        </div>
+    </div>
+
+    <hr>
+
+    <h4>Detalle</h4>
+
+    <table style="width:100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="border:1px solid #ccc;">Producto</th>
+                <th style="border:1px solid #ccc;">Cantidad</th>
+                <th style="border:1px solid #ccc;">Precio</th>
+                <th style="border:1px solid #ccc;">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in invoice.lines.all %}
+            <tr>
+                <td style="border:1px solid #ccc;">{{ line.product }}</td>
+                <td style="border:1px solid #ccc;">{{ line.qty }}</td>
+                <td style="border:1px solid #ccc;">{{ line.price }}</td>
+                <td style="border:1px solid #ccc;">{{ line.subtotal }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No hay líneas</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+
+    <div style="text-align:right;">
+        <p>Subtotal: {{ invoice.subtotal }}</p>
+        <p>IVA (15%): {{ invoice.tax_total }}</p>
+        <h3>Total: {{ invoice.total }}</h3>
+    </div>
+
+</div>
+
+{% endblock %}

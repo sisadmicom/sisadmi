@@ -26,3 +26,4 @@ zeep
 reportlab
 #pip install django-extensions
 django-cors-headers
+django-extensions
