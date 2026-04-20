@@ -1,8 +1,9 @@
-import json
+#/home/sisadmi/workspace/sisadmi/src/sales/views.py
 from django.shortcuts import render, redirect
 from inventory.models import Product
 from people.models import Person
 from .models import SaleInvoice, SaleInvoiceLine
+from django.shortcuts import get_object_or_404
 
 def invoice_create(request):
 
@@ -21,29 +22,51 @@ def invoice_create(request):
             created_by=request.user
         )
 
-        # Procesar líneas
-        for i in range(len(request.POST.getlist("product[]"))):
+        # Crear líneas correctamente
+        product_ids = request.POST.getlist("product[]")
+        qtys = request.POST.getlist("qty[]")
+        prices = request.POST.getlist("price[]")
+
+        for i in range(len(product_ids)):
             SaleInvoiceLine.objects.create(
-                document=invoice,
-                product_id=request.POST.getlist("product[]")[i],
-                qty=request.POST.getlist("qty[]")[i],
-                price=request.POST.getlist("price[]")[i],
+                invoice=invoice,
+                #invoice=invoice,  # ✅ CORRECTO
+                product_id=product_ids[i],
+                qty=qtys[i],
+                price=prices[i],
             )
 
         invoice.calculate_totals()
 
-        return redirect("invoice_list")
+        # 🔥 REDIRECCIÓN CLAVE
+        return redirect("invoice_detail", pk=invoice.id)
 
-    products_json = json.dumps([
-        {"id": p.id, "name": p.name, "price": float(p.price)}
-        for p in products
-    ])
-    #/home/sisadmi/workspace/sisadmi/src/sales/templates/sales/invoice/invoice_form.html
+    return render(request, "sales/invoice/invoice_form.html", {
+        "products": products,
+        "customers": customers,
+    })
+
+
+from django.shortcuts import get_object_or_404
+
+def invoice_detail(request, pk):
+    invoice = get_object_or_404(SaleInvoice, pk=pk)
+
     return render(request, "sales/invoice/invoice_detail.html", {
         "invoice": invoice
     })
-    """return render(request, "sales/invoice_form.html", {
-        "products": products,
-        "customers": customers,
-        "products_json": products_json
-    })"""
+
+from django.views.decorators.http import require_POST
+
+@require_POST
+def invoice_confirm(request, pk):
+    invoice = get_object_or_404(SaleInvoice, pk=pk)
+    invoice.action_confirm()
+    return redirect("invoice_detail", pk=pk)
+
+
+@require_POST
+def invoice_post(request, pk):
+    invoice = get_object_or_404(SaleInvoice, pk=pk)
+    invoice.action_post()
+    return redirect("invoice_detail", pk=pk)

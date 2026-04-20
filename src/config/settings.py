@@ -27,7 +27,7 @@ CSRF_TRUSTED_ORIGINS = [
 INSTALLED_APPS = [
     "people",
     "companies",
-    "users",
+    #"users",
     "core",
     "inventory",
     
@@ -76,7 +76,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,8 +121,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #AUTH_USER_MODEL = "users.User"
-
-AUTH_USER_MODEL = 'users.User'
 
 from datetime import timedelta
 

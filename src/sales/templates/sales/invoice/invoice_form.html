@@ -1,4 +1,3 @@
-#src/sales/templates/sales/invoice/invoice_form.html
 {% extends "base.html" %}
 
 {% block content %}
@@ -10,10 +9,17 @@
 
     <!-- Cliente -->
     <label>Cliente:</label>
-    <input type="text" name="customer" required>
+    <select name="customer" required>
+        <option value="">Seleccione</option>
+        {% for c in customers %}
+            <option value="{{ c.id }}">{{ c.name }}</option>
+        {% endfor %}
+    </select>
+
+    <hr>
 
     <!-- Líneas -->
-    <table id="invoice-lines">
+    <table id="invoice-lines" border="1">
         <thead>
             <tr>
                 <th>Producto</th>
@@ -23,8 +29,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-        </tbody>
+        <tbody></tbody>
     </table>
 
     <button type="button" onclick="addLine()">➕ Agregar línea</button>
@@ -49,8 +54,16 @@ function addLine() {
     const row = document.createElement("tr");
 
     row.innerHTML = `
-        <td><input type="text" name="product[]"></td>
-        <td><input type="number" name="quantity[]" value="1" step="1" onchange="calculateTotals()"></td>
+        <td>
+            <select name="product[]">
+                {% for p in products %}
+                    <option value="{{ p.id }}" data-price="{{ p.price }}">
+                        {{ p.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </td>
+        <td><input type="number" name="qty[]" value="1" step="1" onchange="calculateTotals()"></td>
         <td><input type="number" name="price[]" value="0" step="0.01" onchange="calculateTotals()"></td>
         <td class="line-subtotal">0.00</td>
         <td><button type="button" onclick="removeLine(this)">❌</button></td>
@@ -65,10 +78,10 @@ function removeLine(btn) {
 }
 
 function calculateTotals() {
-    let subtotal = Decimal("0.00");
+    let subtotal = 0;
 
     document.querySelectorAll("#invoice-lines tbody tr").forEach(row => {
-        const qty = parseFloat(row.querySelector("input[name='quantity[]']").value) || 0;
+        const qty = parseFloat(row.querySelector("input[name='qty[]']").value) || 0;
         const price = parseFloat(row.querySelector("input[name='price[]']").value) || 0;
 
         const lineSubtotal = qty * price;

@@ -18,6 +18,13 @@ class DocumentType(models.Model):
         null=True
     )
 
+    sequence = models.ForeignKey(
+        'documents.DocumentSequence',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
     """use_sequence = models.BooleanField(
         default=True
     )

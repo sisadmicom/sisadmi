@@ -5,10 +5,16 @@ from .sale_invoice import SaleInvoice
 
 class SaleInvoiceLine(BaseDocumentLine):
 
-    document = models.ForeignKey(
+    """document = models.ForeignKey(
         SaleInvoice,
-        related_name="lines",
+        related_name="document_lines",
         on_delete=models.CASCADE
+    )"""
+
+    invoice = models.ForeignKey(
+        SaleInvoice,
+        on_delete=models.CASCADE,
+        related_name="lines"
     )
 
     class Meta:

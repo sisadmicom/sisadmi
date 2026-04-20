@@ -33,7 +33,7 @@ if settings.DEBUG:
 
 
 # Added JWT auth and company context endpoints
-from rest_framework_simplejwt.views import (
+"""from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
@@ -50,10 +50,10 @@ urlpatterns += [
     path('api/auth/select-company/', SelectCompanyAPIView.as_view(), name='select_company'),
     path('api/auth/context/', ContextAPIView.as_view(), name='auth_context'),
 ]
-
+"""
 
 # Memberships API
-from users.api.views import MembershipViewSet
+"""from users.api.views import MembershipViewSet
 membership_list = MembershipViewSet.as_view({'get': 'list', 'post': 'create'})
 membership_detail = MembershipViewSet.as_view({'delete': 'destroy'})
 
@@ -61,7 +61,7 @@ urlpatterns += [
     path('api/memberships/', membership_list, name='memberships-list'),
     path('api/memberships/<int:pk>/', membership_detail, name='memberships-detail'),
 ]
-
+"""
 
 # config/urls.py
 from core.views import test_context
@@ -71,3 +71,6 @@ urlpatterns += [
     path("core/", include("core.urls")),
 ]
 
+urlpatterns += [
+    path("sales/", include("sales.urls")),  # 🔥 ESTA LÍNEA
+]

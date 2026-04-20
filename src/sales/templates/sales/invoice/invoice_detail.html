@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Factura #{{ invoice.number }}</h2>
+
+<p><strong>Cliente:</strong> {{ invoice.customer }}</p>
+<p><strong>Fecha:</strong> {{ invoice.date }}</p>
+<p><strong>Estado:</strong> {{ invoice.status }}</p>
+
+<hr>
+
+<h3>Líneas</h3>
+
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for line in invoice.lines.all %}
+        <tr>
+            <td>{{ line.product.name }}</td>
+            <td>{{ line.qty }}</td>
+            <td>{{ line.price }}</td>
+            <td>{{ line.subtotal }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<hr>
+
+<h3>Totales</h3>
+
+<p>Subtotal: {{ invoice.subtotal }}</p>
+<p>IVA: {{ invoice.tax_total }}</p>
+<p><strong>Total: {{ invoice.total }}</strong></p>
+
+<hr>
+
+<!-- 🔥 BOTONES TIPO ERP -->
+<form method="post" action="{% url 'invoice_confirm' invoice.id %}">
+    {% csrf_token %}
+    <button type="submit">✅ Confirmar</button>
+</form>
+
+<form method="post" action="{% url 'invoice_post' invoice.id %}">
+    {% csrf_token %}
+    <button type="submit">📤 Postear</button>
+</form>
+
+{% endblock %}
